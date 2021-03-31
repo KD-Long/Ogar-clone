@@ -1,0 +1,15 @@
+runtime: nodejs14
+service: ogar-client
+env: standard
+instance_class: F1
+handlers:
+  - url: .*
+    script: auto
+  - url: .*
+    script: auto
+automatic_scaling:
+  min_idle_instances: 1
+  max_idle_instances: automatic
+  min_pending_latency: automatic
+  max_pending_latency: automatic
+network: {}
