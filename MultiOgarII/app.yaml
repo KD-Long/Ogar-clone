@@ -1,0 +1,16 @@
+runtime: nodejs14
+service: ogar-server
+env: standard
+instance_class: F1
+handlers:
+  - url: .*
+    script: auto
+env_variables:
+  SERVER_PORT: "8080"
+  STATS_PORT: "8888"
+automatic_scaling:
+  min_idle_instances: 1
+  max_idle_instances: automatic
+  min_pending_latency: automatic
+  max_pending_latency: automatic
+network: {}

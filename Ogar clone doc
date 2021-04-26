@@ -1,0 +1,96 @@
+Ogar clone:
+
+1) Write docs to reproduce
+2) Deploy to appengine (how can you mod on the fly?)
+3) features:
+    - add some more skins
+    - leaderboard with score
+    - easy deploy to appengine
+
+
+
+Notes: fror setup:
+1) Need node 14
+    - Change 
+
+
+MutiOgar:
+    1) MultiOgarII/src/config.js : change port 88 to 8888 "serverStatsPort": 8888, (port not open on vms)
+
+Cigar:
+    1) Cigar2/package.json chnage to node 14 "node": "14.x"
+    2) Cigar2/web/index.html `Change from local host to your server (external IP)
+                    <option value="34.87.231.236:443" selected>34.87.231.236: 443</option>
+                    <option value="34.87.231.236:8080" selected>34.87.231.236 8080</option>
+
+
+
+
+Things that caused problems:
+1) installing node
+2) upgrading to node 14 (https://phoenixnap.com/kb/update-node-js-version)
+3) setting static external IP so it doesnt change
+4) adding ingress/egress fire wall rules for anyone on the web 0.0.0.0/0 to any port (should test only 3000 port tcp) 
+5) creating a golink / customer domain
+
+** cannot do an domain name e.g ...appspot.com:3000 doesnt work
+
+
+####### notes
+server:
+https://ogar-server-dot-kdlong-premium.ts.r.appspot.com
+client:
+https://ogar-client-dot-kdlong-premium.ts.r.appspot.com
+
+
+
+ --- $nohup npm start &
+The nohup means the command should ignore “hang ups” and the ampersand & appended to it is a shell command that tells the system to run the command as background process.
+
+
+
+
+
+#### run this command to start (won't die when you exit ssh)
+nohup npm start </dev/null
+
+### use this command to check its running (8888 stats server, 8080 game server, 3000 cigar client)
+sudo netstat -tulpn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###########
+server is reachable by app engine domain name
+
+Switching to felx to support port forwarding
+flex doesnt support node v12
+    -need to change code
+
+
+   getSpecTarget() {
+        if(this.spectateTarget!= null && spectateTarget.isRemoved)
+             this.spectateTarget = null;
+        if(this.spectateTarget == null || this.spectateTarget==undefined)
+            return this.server.largestClient
+        else
+            return this.spectateTarget
+    }
+
+    Hi, we are passing this case across regions today: go/sf/27323994
+just need a TSE to hold, and if customer reports issue again, bump to P1
