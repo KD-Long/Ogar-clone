@@ -43,7 +43,7 @@ module.exports = Object.seal({
 "serverBind": "0.0.0.0",
 "serverTracker": 0,
 "serverGamemode": 0,
-"serverBots": 20,
+"serverBots": 0,
 "serverViewBaseX": 1920,
 "serverViewBaseY": 1080,
 "serverMinScale": 0.15,
